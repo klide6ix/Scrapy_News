@@ -1,28 +1,18 @@
 import scrapy
 from news.items import NewsItem
+from time import sleep
 
 class NaverSpider(scrapy.Spider):
     name = 'naver'
     allowed_domains = ['finance.naver.com']
-    start_urls = [
-        'https://finance.naver.com/item/news_news.nhn?code=036570&page=1&sm=title_entity_id.basic&clusterId=',
-        'https://finance.naver.com/item/news_news.nhn?code=036570&page=2&sm=title_entity_id.basic&clusterId=',
-        'https://finance.naver.com/item/news_news.nhn?code=036570&page=3&sm=title_entity_id.basic&clusterId=',
-        'https://finance.naver.com/item/news_news.nhn?code=036570&page=4&sm=title_entity_id.basic&clusterId=',
-        'https://finance.naver.com/item/news_news.nhn?code=036570&page=5&sm=title_entity_id.basic&clusterId=',
-        'https://finance.naver.com/item/news_news.nhn?code=036570&page=6&sm=title_entity_id.basic&clusterId=',
-        'https://finance.naver.com/item/news_news.nhn?code=036570&page=7&sm=title_entity_id.basic&clusterId=',
-        'https://finance.naver.com/item/news_news.nhn?code=036570&page=8&sm=title_entity_id.basic&clusterId=',
-        'https://finance.naver.com/item/news_news.nhn?code=036570&page=9&sm=title_entity_id.basic&clusterId=',
-        'https://finance.naver.com/item/news_news.nhn?code=036570&page=10&sm=title_entity_id.basic&clusterId=',
-        'https://finance.naver.com/item/news_news.nhn?code=036570&page=11&sm=title_entity_id.basic&clusterId=',
-        'https://finance.naver.com/item/news_news.nhn?code=036570&page=12&sm=title_entity_id.basic&clusterId=',
-        'https://finance.naver.com/item/news_news.nhn?code=036570&page=13&sm=title_entity_id.basic&clusterId=',
-        'https://finance.naver.com/item/news_news.nhn?code=036570&page=14&sm=title_entity_id.basic&clusterId=',
-        'https://finance.naver.com/item/news_news.nhn?code=036570&page=15&sm=title_entity_id.basic&clusterId='
-    ]
+        
+    def __init__(self):
+        self.start_urls = []
+        for i in range(1, 5):
+            self.start_urls.append('https://finance.naver.com/item/news_news.nhn?code=005930&page={}&sm=title_entity_id.basic&clusterId='.format(i))
 
     def parse(self, response):
+        sleep(1)
         result = response.css('tbody *::text').getall()
 
         prefix = ('\n', '\t')        
