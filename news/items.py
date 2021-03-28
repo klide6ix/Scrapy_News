@@ -8,5 +8,6 @@ import scrapy
 
 class NewsItem(scrapy.Item):
     article = scrapy.Field()
+    press = scrapy.Field()
     date = scrapy.Field()
     #pass

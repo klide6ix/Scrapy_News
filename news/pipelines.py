@@ -20,7 +20,7 @@ class JsonLinesPipeline(object):
         return pipeline
     
     def spider_opened(self, spider):
-        file = open('%s_result.json'%spider.name, 'w+b')
+        file = open('%s_result.json'%spider.name, 'w')
         self.files[spider] = file
         self.exporter = JsonLinesItemExporter(file)
         self.exporter.start_exporting()
